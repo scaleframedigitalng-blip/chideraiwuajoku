@@ -1,3 +1,10 @@
+export interface PartnerBrand {
+  id: string;
+  name: string;
+  logoUrl: string;
+  showName?: boolean;
+}
+
 export interface SiteConfig {
   personal: {
     fullName: string;
@@ -28,6 +35,12 @@ export interface SiteConfig {
       description: string;
       detail: string;
     }[];
+  };
+  partnerships: {
+    heading: string;
+    subheading: string;
+    description: string;
+    showCompanyNames: boolean;
   };
   leadership: {
     eyebrow: string;

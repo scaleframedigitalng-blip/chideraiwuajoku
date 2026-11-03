@@ -1,13 +1,12 @@
 import React from 'react';
-import { Settings2, ArrowUp, ArrowUpRight } from 'lucide-react';
+import { ArrowUp, ArrowUpRight } from 'lucide-react';
 import { SiteConfig } from '../types/content';
 
 interface FooterProps {
   config: SiteConfig;
-  onOpenSettings: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ config, onOpenSettings }) => {
+export const Footer: React.FC<FooterProps> = ({ config }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -48,6 +47,11 @@ export const Footer: React.FC<FooterProps> = ({ config, onOpenSettings }) => {
               <li>
                 <a href="#approach" className="hover:text-[#FAF9F5] transition-colors">
                   My Approach
+                </a>
+              </li>
+              <li>
+                <a href="#affiliations" className="hover:text-[#FAF9F5] transition-colors">
+                  Affiliations
                 </a>
               </li>
               <li>
@@ -120,20 +124,16 @@ export const Footer: React.FC<FooterProps> = ({ config, onOpenSettings }) => {
             <span>© {new Date().getFullYear()} Chidera Iwuajoku. All rights reserved.</span>
             <span aria-hidden="true" className="hidden sm:inline">·</span>
             <span>Real Estate Consultant & Founder, Prime Culture Homes · Nigeria</span>
+            <a
+              href="#admin"
+              className="opacity-0 hover:opacity-100 focus:opacity-100 text-[11px] text-[#B8AA91] transition-opacity ml-1.5 underline"
+              title="Executive Studio Portal"
+            >
+              Portal
+            </a>
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Site & Portrait Management Modal Trigger */}
-            <button
-              type="button"
-              onClick={onOpenSettings}
-              className="inline-flex items-center gap-1.5 text-xs text-[#B8AA91] hover:text-[#FAF9F5] transition-colors focus-visible:outline-none"
-              title="Manage site information and portrait"
-            >
-              <Settings2 className="w-3.5 h-3.5" />
-              <span>Portrait & Site Settings</span>
-            </button>
-
             <button
               type="button"
               onClick={scrollToTop}

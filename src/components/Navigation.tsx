@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
-interface NavigationProps {
-  onOpenSettings?: () => void;
-}
-
-export const Navigation: React.FC<NavigationProps> = () => {
+export const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -14,7 +10,7 @@ export const Navigation: React.FC<NavigationProps> = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      const sections = ['home', 'about', 'approach', 'leadership', 'contact'];
+      const sections = ['home', 'about', 'approach', 'affiliations', 'leadership', 'contact'];
       const current = sections.find((section) => {
         const el = document.getElementById(section);
         if (el) {
@@ -36,6 +32,7 @@ export const Navigation: React.FC<NavigationProps> = () => {
     { label: 'Home', href: '#home', id: 'home' },
     { label: 'About', href: '#about', id: 'about' },
     { label: 'My Approach', href: '#approach', id: 'approach' },
+    { label: 'Affiliations', href: '#affiliations', id: 'affiliations' },
     { label: 'Leadership', href: '#leadership', id: 'leadership' },
     { label: 'Contact', href: '#contact', id: 'contact' },
   ];

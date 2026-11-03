@@ -1,4 +1,25 @@
-import { SiteConfig } from '../types/content';
+import { SiteConfig, PartnerBrand } from '../types/content';
+
+export const INITIAL_PARTNER_BRANDS: PartnerBrand[] = [
+  {
+    id: 'partner_teamfocus',
+    name: 'Teamfocus Realtors Group',
+    logoUrl: '/assets/aistudio/images__5_-removebg-preview_c5d0f405.png',
+    showName: true,
+  },
+  {
+    id: 'partner_abode',
+    name: 'Abode',
+    logoUrl: '/assets/aistudio/images__4_-removebg-preview_bf1c3c2a.png',
+    showName: true,
+  },
+  {
+    id: 'partner_psp',
+    name: 'PSP',
+    logoUrl: '/assets/aistudio/logo-removebg-preview_1432acc0.png',
+    showName: true,
+  },
+];
 
 export const DEFAULT_SITE_CONFIG: SiteConfig = {
   personal: {
@@ -64,6 +85,13 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
       },
     ],
   },
+  partnerships: {
+    heading: "Partnering With",
+    subheading: "Partnering With Established Real Estate Brands",
+    description:
+      "Working alongside and professionally representing established real estate companies and property brands across Nigeria.",
+    showCompanyNames: true,
+  },
   leadership: {
     eyebrow: "Leadership & Entrepreneurship",
     role: "Founder & CEO",
@@ -113,9 +141,10 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
   },
 };
 
-const STORAGE_KEY_CONFIG = 'chidera_site_config_v1';
+const STORAGE_KEY_CONFIG = 'chidera_site_config_v2';
 const STORAGE_KEY_PORTRAIT = 'chidera_user_portrait_v1';
 const STORAGE_KEY_BRAND_LOGO = 'chidera_prime_culture_logo_v1';
+const STORAGE_KEY_PARTNERS = 'chidera_partner_brands_v1';
 
 export function loadStoredConfig(): SiteConfig {
   try {
@@ -126,6 +155,7 @@ export function loadStoredConfig(): SiteConfig {
         ...DEFAULT_SITE_CONFIG,
         ...parsed,
         personal: { ...DEFAULT_SITE_CONFIG.personal, ...parsed.personal },
+        partnerships: { ...DEFAULT_SITE_CONFIG.partnerships, ...parsed.partnerships },
         leadership: { ...DEFAULT_SITE_CONFIG.leadership, ...parsed.leadership },
         exploreBusiness: { ...DEFAULT_SITE_CONFIG.exploreBusiness, ...parsed.exploreBusiness },
       };
@@ -141,6 +171,26 @@ export function saveStoredConfig(config: SiteConfig): void {
     localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(config));
   } catch (err) {
     console.warn('Could not write site config to storage:', err);
+  }
+}
+
+export function loadStoredPartners(): PartnerBrand[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_PARTNERS);
+    if (raw) {
+      return JSON.parse(raw);
+    }
+  } catch (err) {
+    console.warn('Could not read partners from storage:', err);
+  }
+  return INITIAL_PARTNER_BRANDS;
+}
+
+export function saveStoredPartners(partners: PartnerBrand[]): void {
+  try {
+    localStorage.setItem(STORAGE_KEY_PARTNERS, JSON.stringify(partners));
+  } catch (err) {
+    console.warn('Could not write partners to storage:', err);
   }
 }
 
